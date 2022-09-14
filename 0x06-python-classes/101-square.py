@@ -1,67 +1,83 @@
 #!/usr/bin/python3
 """
-This module defines a Square class
-Its implements value and type checks for its attributes
-Attributes:
-    area
-    my_print
+No module imported
 """
 
 
 class Square:
-    """Square implementation
     """
-    def __init__(self, size=0, position=(0, 0)):
-        self.size = size
-        self.position = position
-
-    def __str__(self):
-
-        txt = ''
-        if (self.__size == 0):
-            pass
-        else:
-            for i in range(self.position[1]):
-                txt += '\n'
-
-            for i in range(self.size):
-                txt += ' ' * self.position[0] + '#' * self.size
-
-        return txt
+    Private instance attribute size
+    public instance method
+    """
+    def __init__(self, size=0):
+        """private instance attribute
+        parameters
+        -------------------------
+        size : integer else TypeError
+        if size less than 0, raise value error
+        """
+        self.__size = size
 
     @property
     def size(self):
+        """
+        to retrieve private instance attribute
+        """
         return self.__size
 
     @size.setter
-    def size(self, size):
-        if type(size) != int:
-            raise TypeError('size must be an integer')
-        elif size < 0:
-            raise ValueError('size must be >= 0')
-        self.__size = size
+    def size(self, value):
+        """
+        to set private instance attribute
+        """
+        self.__size = value
+        try:
+            assert type(value) == int
+        except:
+            raise TypeError("size must be an integer")
+        if value < 0:
+            raise ValueError("size must be >= 0")
 
     def area(self):
-        """calculates the square area
         """
-        return (self.size ** 2)
-
-    def my_print(self):
-        """prints a square  with the corresponding size
+        public instance method
+        returns the current square area
         """
-        print(self.__str__())
+        area = self.__size ** 2
+        return area
 
-    @property
-    def position(self):
-        return self.__position
+    def __lt__(self, other):
+        """check for less than"""
+        if self.__size ** 2 < other.__size ** 2:
+            return True
+        return False
 
-    @position.setter
-    def position(self, position):
-        if type(position) != tuple or \
-            len(position) != 2 or \
-            not all(isinstance(el, int) for el in position) or \
-                not all(el >= 0 for el in position):
+    def __le__(self, other):
+        """check for <="""
+        if self.__size ** 2 <= other.__size ** 2:
+            return True
+        return False
 
-            raise TypeError('position must be a tuple of 2 positive integers')
+    def __eq__(self, other):
+        """check for =="""
+        if self.__size ** 2 == other.__size ** 2:
+            return True
+        return False
 
-        self.__position = position
+    def __ne__(self, other):
+        """check for !="""
+        if self.__size ** 2 != other.__size ** 2:
+            return True
+        return False
+
+    def __gt__(self, other):
+        """check for >"""
+        if self.__size ** 2 > other.__size ** 2:
+            return True
+        return False
+
+    def __ge__(self, other):
+        """check for >="""
+        if self.__size ** 2 >= other.__size ** 2:
+            return True
+        return False
